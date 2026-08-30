@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="3;url=https://script.google.com/macros/s/AKfycbw0SubTP2aXPnNwbFN8QZh6_zpu2OMcsSHzesoh_md3Nn5XDrCNlVUoKdd_C8DL0Ges1A/exec">
-    <title>Sistema Académico - Redireccionando</title>
+    <title>PERMIC 2026 V1.0 - Redireccionando</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,95 +29,19 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
             padding: 40px 30px;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             animation: fadeIn 0.8s ease-out;
+            position: relative;
         }
 
         .icon-container {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-        }
-
-        .icon-container svg {
-            width: 45px;
-            height: 45px;
-            fill: #ffffff;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        p {
-            font-size: 0.95rem;
-            color: #e0e6ed;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        /* Spinner de carga */
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #ffffff;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            width: 100%;
-            padding: 14px 20px;
-            background-color: #ffffff;
-            color: #1e3c72;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: #f0f4f8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Animaciones */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="card">
-        <div class="icon-container">
-            <svg viewBox="0 0 24 24">
+            width: 85px;
