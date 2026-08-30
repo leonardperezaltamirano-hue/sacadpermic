@@ -2,799 +2,122 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SISTEMA ACADÉMICO LP v2.2.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3;url=https://script.google.com/macros/s/AKfycbw0SubTP2aXPnNwbFN8QZh6_zpu2OMcsSHzesoh_md3Nn5XDrCNlVUoKdd_C8DL0Ges1A/exec">
+    <title>Sistema Académico - Redireccionando</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --primary: #6366f1; --bg-main: #fcfdfe; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-main); color: #1e293b; }
-        .view-section { display: none; }
-        .view-section.active { display: block; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .sidebar-item { transition: all 0.2s ease; cursor: pointer; }
-        .sidebar-item.active { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3); }
-        .glass-card { background: white; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: all 0.25s ease; }
-        .glass-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); border-color: #e2e8f0; }
-        .score-input { transition: all 0.2s ease; border: 2px solid transparent; }
-        .score-input:focus { background: white; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); outline: none; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+        }
+
+        .icon-container svg {
+            width: 45px;
+            height: 45px;
+            fill: #ffffff;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #e0e6ed;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* Spinner de carga */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #ffffff;
+            color: #1e3c72;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #f0f4f8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Animaciones */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col md:flex-row overflow-hidden select-none">
-
-    <div id="sidebarBackdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden md:hidden"></div>
-
-    <!-- PANTALLA DE LOGIN -->
-    <div id="loginScreen" class="fixed inset-0 z-[200] bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 md:p-10 shadow-2xl border border-slate-100 space-y-8">
-            <div class="text-center space-y-3">
-                <div class="w-16 h-16 bg-indigo-600 text-white rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-indigo-200">
-                    <i class="fas fa-layer-group text-2xl"></i>
-                </div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-tight">SISTEMA LP</h1>
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Acceso de Personal</p>
-            </div>
-
-            <form id="formLogin" onsubmit="ejecutarLogin(event)" class="space-y-4">
-                <div>
-                    <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest block mb-2">Usuario</label>
-                    <div class="relative">
-                        <i class="fas fa-user absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="text" id="logUsuario" required placeholder="Ej: admin o juan" class="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest block mb-2">Contraseña</label>
-                    <div class="relative">
-                        <i class="fas fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="password" id="logPassword" required placeholder="••••••••" class="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                </div>
-
-                <div id="loginError" class="hidden text-rose-500 text-xs font-bold text-center py-1"></div>
-
-                <button type="submit" id="btnLoginSubmit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-2xl font-black text-xs shadow-xl uppercase tracking-widest transition-all">
-                    Iniciar Sesión
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <aside id="mainSidebar" class="w-72 bg-white border-r border-slate-100 flex flex-col h-screen fixed md:relative z-50 -translate-x-full md:translate-x-0 transition-transform duration-300">
-        <div class="p-8">
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                        <i class="fas fa-layer-group text-white text-lg"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-extrabold tracking-tight text-slate-900">SISTEMA LP</h1>
-                        <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">v2.2.0</span>
-                    </div>
-                </div>
-                <button onclick="toggleMobileSidebar()" class="md:hidden text-slate-400 hover:text-slate-600">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center justify-between">
-                <div class="truncate">
-                    <p id="userProfileName" class="font-black text-xs text-slate-800 truncate">Docente</p>
-                    <p id="userProfileRol" class="text-[9px] font-bold text-indigo-600 uppercase">Sin Rol</p>
-                </div>
-                <button onclick="cerrarSesion()" title="Cerrar Sesión" class="text-slate-400 hover:text-rose-500 transition-colors">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </div>
-
-        <nav class="flex-1 px-6 space-y-2 overflow-y-auto">
-            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4 mb-4">Navegación</p>
-            <button onclick="showSection('dashboard')" id="nav-dashboard" class="sidebar-item active w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm">
-                <i class="fas fa-chart-pie w-5"></i> Panel General
-            </button>
-            <button onclick="showSection('cursos')" id="nav-cursos" class="sidebar-item w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm text-slate-500 hover:bg-slate-50">
-                <i class="fas fa-university w-5"></i> Cursos Académicos
-            </button>
-            <button onclick="showSection('gestionEstudiantes')" id="nav-gestionEstudiantes" class="sidebar-item w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm text-slate-500 hover:bg-slate-50">
-                <i class="fas fa-user-graduate w-5"></i> Estudiantes
-            </button>
-        </nav>
-
-        <div class="p-6 border-t border-slate-50 space-y-3">
-            <button onclick="abrirModalEstudiante(null)" class="w-full bg-indigo-600 text-white py-3.5 rounded-2xl font-bold text-[11px] flex items-center justify-center gap-3 shadow-xl uppercase tracking-widest">
-                <i class="fas fa-user-plus"></i> Estudiante
-            </button>
-            <button id="btnAdminCrearUsuario" onclick="abrirModal('modalUsuario')" class="w-full bg-slate-800 text-white py-3.5 rounded-2xl font-bold text-[11px] flex items-center justify-center gap-3 shadow-lg uppercase tracking-widest">
-                <i class="fas fa-user-shield"></i> Usuario
-            </button>
-        </div>
-    </aside>
-
-    <main class="flex-1 h-screen overflow-y-auto relative flex flex-col bg-slate-50/50">
-        <header class="md:hidden bg-white border-b border-slate-100 p-4 flex items-center justify-between sticky top-0 z-30">
-            <div class="flex items-center gap-3">
-                <button onclick="toggleMobileSidebar()" class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <span class="font-extrabold text-sm text-slate-900">SISTEMA LP</span>
-            </div>
-            <button onclick="cargarDatos(true)" class="text-indigo-600 font-bold text-xs flex items-center gap-2">
-                <i class="fas fa-sync-alt"></i> Sincronizar
-            </button>
-        </header>
-
-        <div class="p-6 md:p-12 flex-1 pb-24 space-y-8">
-            <div class="hidden md:flex flex-col md:flex-row md:items-center justify-between gap-6 mb-4">
-                <div>
-                    <h2 id="sectionTitle" class="text-3xl font-black text-slate-900 tracking-tight">Panel General</h2>
-                    <p class="text-slate-500 text-xs font-medium" id="txtUltimaActualizacion">Conectado a Google Sheets</p>
-                </div>
-                <button onclick="cargarDatos(true)" class="bg-white border border-slate-100 text-indigo-600 px-6 py-3 rounded-2xl font-bold text-xs shadow-xs flex items-center gap-3 hover:bg-indigo-50">
-                    <i id="iconSpin" class="fas fa-sync-alt"></i> Sincronizar
-                </button>
-            </div>
-
-            <div id="loadingSpinner" class="hidden flex-col items-center justify-center py-20 gap-3">
-                <div class="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sincronizando planilla...</p>
-            </div>
-
-            <!-- SECCIÓN 1: DASHBOARD -->
-            <section id="section-dashboard" class="view-section active space-y-8">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-black text-indigo-200 uppercase tracking-widest">Mis Estudiantes</span>
-                            <div id="kpiTotalEstudiantes" class="text-4xl font-black mt-2">0</div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] flex flex-col justify-between">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Usuarios Activos</span>
-                        <div id="kpiTotalUsuarios" class="text-3xl font-black text-slate-800 mt-2">0</div>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] flex flex-col justify-between">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mis Cursos</span>
-                        <div id="kpiTotalCursos" class="text-3xl font-black text-slate-800 mt-2">0</div>
-                    </div>
-                    <div class="glass-card p-6 rounded-[2rem] flex flex-col justify-between">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Promedio General</span>
-                        <div id="kpiPromedio" class="text-3xl font-black text-emerald-600 mt-2">0</div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="glass-card p-8 rounded-[2.5rem]">
-                        <h3 class="font-black text-slate-800 text-base mb-4">Estudiantes por Curso</h3>
-                        <div class="relative h-56 w-full"><canvas id="chartCursos"></canvas></div>
-                    </div>
-                    <div class="glass-card p-8 rounded-[2.5rem]">
-                        <h3 class="font-black text-slate-800 text-base mb-4">Distribución por Rol</h3>
-                        <div class="relative h-56 w-full"><canvas id="chartRoles"></canvas></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECCIÓN 2: CURSOS CON BOTÓN DE AGREGAR -->
-            <section id="section-cursos" class="view-section space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <p class="text-slate-500 font-medium text-xs">Selecciona un curso para evaluar o crea uno nuevo.</p>
-                    <button onclick="abrirModal('modalNuevoCurso')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl font-bold text-xs shadow-lg uppercase tracking-wider flex items-center gap-2 self-start sm:self-auto">
-                        <i class="fas fa-plus"></i> Nuevo Curso
-                    </button>
-                </div>
-                <div id="gridCursos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"></div>
-            </section>
-
-            <!-- SECCIÓN 3: GESTIÓN COMPLETA DE ESTUDIANTES -->
-            <section id="section-gestionEstudiantes" class="view-section space-y-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900 tracking-tight">Directorio de Estudiantes</h3>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Filtro independiente por usuario</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <input type="text" id="filtroGestionEstudiantes" oninput="renderTablaGestionEstudiantes()" placeholder="Buscar..." class="px-6 py-3 bg-white border border-slate-100 rounded-2xl text-xs font-bold outline-none w-full md:w-64">
-                        <button onclick="abrirModalEstudiante(null)" class="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                            <i class="fas fa-plus"></i> Nuevo
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden shadow-xl">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs border-collapse min-w-[700px]">
-                            <thead>
-                                <tr class="bg-slate-50/50 border-b border-slate-50 text-slate-400 font-black uppercase tracking-widest">
-                                    <th class="px-6 py-4">Código / RUDE</th>
-                                    <th class="px-6 py-4">Estudiante</th>
-                                    <th class="px-6 py-4">Curso</th>
-                                    <th class="px-6 py-4">Contacto</th>
-                                    <th class="px-6 py-4 text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tblGestionEstudiantesBody" class="divide-y divide-slate-50"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECCIÓN 4: TRIMESTRES -->
-            <section id="section-trimestres" class="view-section space-y-8">
-                <div class="flex items-center gap-6">
-                    <button onclick="showSection('cursos')" class="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-indigo-600"><i class="fas fa-chevron-left"></i></button>
-                    <div>
-                        <h3 id="lblCursoSeleccionado" class="text-3xl font-black text-slate-900 uppercase">CURSO</h3>
-                        <p class="text-indigo-500 font-bold text-xs uppercase tracking-widest">Selecciona el trimestre a evaluar</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-6">
-                    <button onclick="abrilPlanillaTrimestre(1)" class="glass-card group p-10 rounded-[2.5rem] text-center">
-                        <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-amber-600 font-extrabold text-2xl">1</div>
-                        <h4 class="font-black text-slate-800 uppercase">PRIMER TRIMESTRE</h4>
-                    </button>
-                    <button onclick="abrilPlanillaTrimestre(2)" class="glass-card group p-10 rounded-[2.5rem] text-center">
-                        <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-indigo-600 font-extrabold text-2xl">2</div>
-                        <h4 class="font-black text-slate-800 uppercase">SEGUNDO TRIMESTRE</h4>
-                    </button>
-                    <button onclick="abrilPlanillaTrimestre(3)" class="glass-card group p-10 rounded-[2.5rem] text-center">
-                        <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600 font-extrabold text-2xl">3</div>
-                        <h4 class="font-black text-slate-800 uppercase">TERCER TRIMESTRE</h4>
-                    </button>
-                </div>
-            </section>
-
-            <!-- SECCIÓN 5: PLANILLA NOTAS -->
-            <section id="section-evaluacion" class="view-section space-y-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <button onclick="showSection('trimestres')" class="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400"><i class="fas fa-chevron-left"></i></button>
-                        <div>
-                            <h3 id="lblTituloPlanilla" class="text-2xl font-black text-slate-900 uppercase">Planilla de Notas</h3>
-                            <p id="lblSubtituloTrimestre" class="text-xs text-indigo-500 font-black uppercase tracking-widest mt-0.5"></p>
-                        </div>
-                    </div>
-                    <input type="text" id="filtroTablaEstudiantes" oninput="renderEstudiantesEvaluar()" placeholder="Filtrar estudiante..." class="px-6 py-3 bg-white border border-slate-100 rounded-2xl text-xs font-bold outline-none w-full md:w-64">
-                </div>
-
-                <div class="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden shadow-xl">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs border-collapse min-w-[850px]">
-                            <thead>
-                                <tr class="bg-slate-50/50 border-b border-slate-50 text-slate-400 font-black uppercase tracking-widest">
-                                    <th class="px-8 py-5">Estudiante</th>
-                                    <th class="px-3 py-5 text-center">Ser (10)</th>
-                                    <th class="px-3 py-5 text-center">Saber (45)</th>
-                                    <th class="px-3 py-5 text-center">Hacer (40)</th>
-                                    <th class="px-3 py-5 text-center">Autoevaluación (5)</th>
-                                    <th class="px-4 py-5 text-center bg-slate-100/50 text-slate-900">Total Trimestre</th>
-                                    <th class="px-4 py-5 text-center">Nota Final</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tblEstudiantesBody" class="divide-y divide-slate-50"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <footer class="bg-white/80 backdrop-blur-md border-t border-slate-50 py-4 px-6 md:px-12 flex justify-between items-center fixed bottom-0 left-0 md:left-72 right-0 z-40">
-            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">© 2026 LP ACADÉMICO</span>
-            <div class="flex items-center gap-2">
-                <div id="sync-dot" class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                <span id="sync-text" class="text-[9px] font-bold text-slate-400 uppercase">Sincronizado</span>
-            </div>
-        </footer>
-    </main>
-
-    <!-- MODAL NUEVO CURSO -->
-    <div id="modalNuevoCurso" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-sm rounded-[3rem] p-8 md:p-10 shadow-2xl">
-            <h3 class="text-2xl font-black text-slate-900 text-center mb-6">Nuevo Curso</h3>
-            <form onsubmit="ejecutarCrearCurso(event)" class="space-y-4">
-                <input type="text" id="txtNuevoCurso" required placeholder="Nombre del Curso (Ej: S1A) *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs uppercase">
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="cerrarModal('modalNuevoCurso')" class="flex-1 py-4 font-bold text-slate-400 text-xs">Cancelar</button>
-                    <button type="submit" id="btnSaveCurso" class="flex-1 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-lg uppercase tracking-wider">Crear</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL ESTUDIANTE -->
-    <div id="modalEstudiante" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 md:p-10 shadow-2xl">
-            <h3 id="modalEstudianteTitulo" class="text-2xl font-black text-slate-900 text-center mb-6">Nuevo Estudiante</h3>
-            <form id="formEstudiante" onsubmit="ejecutarGuardarEstudiante(event)" class="space-y-4">
-                <input type="hidden" id="estRowIndex" value="">
-                <input type="text" id="estCodigo" required placeholder="Código / RUDE *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                <input type="text" id="estNombre" required placeholder="Nombre Completo *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                <input type="text" id="estCurso" required placeholder="Curso (Ej: S1A) *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs uppercase">
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="text" id="estContacto" placeholder="Tel. Contacto" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                    <input type="email" id="estCorreo" placeholder="Correo electrónico" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                </div>
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="cerrarModal('modalEstudiante')" class="flex-1 py-4 font-bold text-slate-400 text-xs">Cancelar</button>
-                    <button type="submit" id="btnSaveEst" class="flex-1 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-lg uppercase tracking-wider">Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL REGISTRAR USUARIO (ADMIN/DIRECTOR) -->
-    <div id="modalUsuario" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 md:p-10 shadow-2xl">
-            <h3 class="text-2xl font-black text-slate-900 text-center mb-6">Nuevo Usuario</h3>
-            <form id="formUsuario" onsubmit="guardarUsuario(event)" class="space-y-4">
-                <input type="text" id="usrUsuario" required placeholder="Nombre de Usuario *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                <input type="password" id="usrPassword" required placeholder="Contraseña *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                <input type="text" id="usrNombre" required placeholder="Nombre Completo *" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                <div class="grid grid-cols-2 gap-3">
-                    <select id="usrRol" required class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                        <option value="docente">Docente</option>
-                        <option value="director">Director</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    <input type="email" id="usrCorreo" placeholder="Correo electrónico" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-xs">
-                </div>
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="cerrarModal('modalUsuario')" class="flex-1 py-4 font-bold text-slate-400 text-xs">Cancelar</button>
-                    <button type="submit" id="btnSaveUsr" class="flex-1 bg-slate-800 text-white px-8 py-4 rounded-2xl font-black text-xs shadow-lg uppercase tracking-wider">Crear Usuario</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        let isFetching = false;
-        let listaEstudiantesGlobal = [];
-        let usuarioSesion = null;
-        let cursoActual = null;
-        let trimestreActual = 1;
-        let chartCursosInstance = null;
-        let chartRolesInstance = null;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const sesionGuardada = localStorage.getItem('lp_academico_user');
-            if (sesionGuardada) {
-                try {
-                    usuarioSesion = JSON.parse(sesionGuardada);
-                    iniciarApp();
-                } catch(e) { mostrarLogin(); }
-            } else {
-                mostrarLogin();
-            }
-        });
-
-        function toggleMobileSidebar() {
-            const sb = document.getElementById('mainSidebar');
-            const backdrop = document.getElementById('sidebarBackdrop');
-            sb.classList.toggle('-translate-x-full');
-            backdrop.classList.toggle('hidden');
-        }
-
-        function mostrarLogin() {
-            document.getElementById('loginScreen').classList.remove('hidden');
-        }
-
-        function cerrarSesion() {
-            localStorage.removeItem('lp_academico_user');
-            usuarioSesion = null;
-            document.getElementById('loginScreen').classList.remove('hidden');
-        }
-
-        function ejecutarLogin(e) {
-            e.preventDefault();
-            const usr = document.getElementById('logUsuario').value;
-            const pass = document.getElementById('logPassword').value;
-            const btn = document.getElementById('btnLoginSubmit');
-            const errDiv = document.getElementById('loginError');
-
-            btn.disabled = true;
-            btn.textContent = 'Verificando...';
-            errDiv.classList.add('hidden');
-
-            google.script.run
-                .withSuccessHandler(res => {
-                    btn.disabled = false;
-                    btn.textContent = 'Iniciar Sesión';
-                    if (res.success) {
-                        usuarioSesion = res.usuario;
-                        localStorage.setItem('lp_academico_user', JSON.stringify(usuarioSesion));
-                        document.getElementById('formLogin').reset();
-                        document.getElementById('loginScreen').classList.add('hidden');
-                        iniciarApp();
-                    } else {
-                        errDiv.textContent = res.error;
-                        errDiv.classList.remove('hidden');
-                    }
-                })
-                .withFailureHandler(err => {
-                    btn.disabled = false;
-                    btn.textContent = 'Iniciar Sesión';
-                    errDiv.textContent = 'Error de conexión backend';
-                    errDiv.classList.remove('hidden');
-                })
-                .validarLogin(usr, pass);
-        }
-
-        function iniciarApp() {
-            document.getElementById('userProfileName').textContent = usuarioSesion.nombre;
-            document.getElementById('userProfileRol').textContent = usuarioSesion.rol;
-
-            const btnUsr = document.getElementById('btnAdminCrearUsuario');
-            if (usuarioSesion.rol === 'docente') {
-                btnUsr.classList.add('hidden');
-            } else {
-                btnUsr.classList.remove('hidden');
-            }
-
-            cargarDatos(true);
-        }
-
-        function cargarDatos(mostrarSpinner = false) {
-            if (isFetching || !usuarioSesion) return;
-            isFetching = true;
-
-            setSyncStatus('syncing', 'Sincronizando...');
-            if (mostrarSpinner) document.getElementById('loadingSpinner').classList.remove('hidden');
-            document.getElementById('iconSpin').classList.add('fa-spin');
-
-            google.script.run
-                .withSuccessHandler(renderizarTodo)
-                .withFailureHandler(err => {
-                    isFetching = false;
-                    document.getElementById('loadingSpinner').classList.add('hidden');
-                    document.getElementById('iconSpin').classList.remove('fa-spin');
-                    setSyncStatus('error', 'Error al sincronizar');
-                })
-                .obtenerDatosSistema(usuarioSesion);
-        }
-
-        function renderizarTodo(res) {
-            isFetching = false;
-            document.getElementById('loadingSpinner').classList.add('hidden');
-            document.getElementById('iconSpin').classList.remove('fa-spin');
-
-            if (!res.success) {
-                setSyncStatus('error', 'Error backend');
-                alert('Error: ' + res.error);
-                return;
-            }
-
-            setSyncStatus('success', 'Sincronizado');
-            document.getElementById('txtUltimaActualizacion').textContent = 'Últ. sinc: ' + new Date().toLocaleTimeString();
-
-            document.getElementById('kpiTotalEstudiantes').textContent = res.kpis.totalEstudiantes;
-            document.getElementById('kpiTotalUsuarios').textContent = res.kpis.totalUsuarios;
-            document.getElementById('kpiTotalCursos').textContent = res.kpis.totalCursos;
-            document.getElementById('kpiPromedio').textContent = res.kpis.promedioGeneral;
-
-            listaEstudiantesGlobal = res.estudiantes || [];
-
-            renderGraficos(res.cursosContador, res.rolesContador);
-            renderGridCursos(res.cursosContador);
-
-            if (document.getElementById('section-gestionEstudiantes').classList.contains('active')) {
-                renderTablaGestionEstudiantes();
-            }
-            if (document.getElementById('section-evaluacion').classList.contains('active')) {
-                renderEstudiantesEvaluar();
-            }
-        }
-
-        function showSection(id) {
-            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
-            document.getElementById(`section-${id}`).classList.add('active');
-            
-            document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
-            if (document.getElementById(`nav-${id}`)) document.getElementById(`nav-${id}`).classList.add('active');
-
-            const titles = { 
-                dashboard: 'Panel General', 
-                cursos: 'Mis Cursos Académicos', 
-                gestionEstudiantes: 'Gestión de Estudiantes',
-                trimestres: 'Trimestres', 
-                evaluacion: 'Planilla de Evaluación' 
-            };
-            document.getElementById('sectionTitle').textContent = titles[id] || 'Panel';
-
-            const sb = document.getElementById('mainSidebar');
-            if (!sb.classList.contains('-translate-x-full') && window.innerWidth < 768) {
-                toggleMobileSidebar();
-            }
-
-            cargarDatos(false);
-        }
-
-        function renderGridCursos(cursosContador) {
-            const container = document.getElementById('gridCursos');
-            container.innerHTML = '';
-
-            const cursos = Object.keys(cursosContador || {});
-            if (cursos.length === 0) {
-                container.innerHTML = '<p class="text-slate-400 font-bold uppercase text-xs py-10 col-span-full text-center">No tienes cursos registrados. ¡Crea uno nuevo!</p>';
-                return;
-            }
-
-            cursos.forEach(cur => {
-                const count = cursosContador[cur];
-                const card = document.createElement('div');
-                card.onclick = () => seleccionarCurso(cur);
-                card.className = 'glass-card p-8 rounded-[2.5rem] cursor-pointer group flex items-center gap-6';
-                card.innerHTML = `
-                    <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center font-black text-xl group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-md">
-                        ${cur.charAt(0)}
-                    </div>
-                    <div>
-                        <h4 class="font-black text-slate-800 text-lg uppercase">${cur}</h4>
-                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1">${count} Estudiantes</p>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function ejecutarCrearCurso(e) {
-            e.preventDefault();
-            const nom = document.getElementById('txtNuevoCurso').value.trim();
-            if (!nom) return;
-            
-            const btn = document.getElementById('btnSaveCurso');
-            btn.disabled = true;
-
-            google.script.run
-                .withSuccessHandler(res => {
-                    btn.disabled = false;
-                    if (res.success) {
-                        document.getElementById('txtNuevoCurso').value = '';
-                        cerrarModal('modalNuevoCurso');
-                        cargarDatos(false);
-                    } else alert(res.error);
-                })
-                .withFailureHandler(err => {
-                    btn.disabled = false;
-                    alert('Error: ' + err.message);
-                })
-                .agregarCurso(nom, usuarioSesion);
-        }
-
-        function seleccionarCurso(cur) {
-            cursoActual = cur;
-            document.getElementById('lblCursoSeleccionado').textContent = `Curso: ${cur}`;
-            showSection('trimestres');
-        }
-
-        function abrilPlanillaTrimestre(t) {
-            trimestreActual = t;
-            document.getElementById('lblTituloPlanilla').textContent = `Planilla: ${cursoActual}`;
-            document.getElementById('lblSubtituloTrimestre').textContent = `${t}° Trimestre Evaluativo`;
-            renderEstudiantesEvaluar();
-            showSection('evaluacion');
-        }
-
-        function renderTablaGestionEstudiantes() {
-            const filter = document.getElementById('filtroGestionEstudiantes').value.toLowerCase();
-            const tbody = document.getElementById('tblGestionEstudiantesBody');
-            tbody.innerHTML = '';
-
-            const filtrados = listaEstudiantesGlobal.filter(e => 
-                e.nombre.toLowerCase().includes(filter) || 
-                e.codigo.toLowerCase().includes(filter) ||
-                e.curso.toLowerCase().includes(filter)
-            );
-
-            if (filtrados.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-slate-400 font-bold uppercase text-xs">No se encontraron estudiantes</td></tr>';
-                return;
-            }
-
-            filtrados.forEach(e => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/50';
-                tr.innerHTML = `
-                    <td class="px-6 py-4 font-bold text-indigo-600">${e.codigo || 'N/A'}</td>
-                    <td class="px-6 py-4 font-black text-slate-800 uppercase">${e.nombre}</td>
-                    <td class="px-6 py-4 font-bold text-slate-500 uppercase">${e.curso}</td>
-                    <td class="px-6 py-4 font-medium text-slate-400">${e.contacto || 'N/A'}</td>
-                    <td class="px-6 py-4 text-center">
-                        <div class="flex items-center justify-center gap-2">
-                            <button onclick='abrirModalEstudiante(${JSON.stringify(e)})' class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 hover:bg-indigo-600 hover:text-white transition-colors flex items-center justify-center">
-                                <i class="fas fa-pencil-alt text-xs"></i>
-                            </button>
-                            <button onclick="confirmarEliminarEstudiante(${e.rowIndex}, '${e.nombre}')" class="w-8 h-8 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-600 hover:text-white transition-colors flex items-center justify-center">
-                                <i class="fas fa-trash text-xs"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function abrirModalEstudiante(est = null) {
-            const form = document.getElementById('formEstudiante');
-            form.reset();
-
-            if (est) {
-                document.getElementById('modalEstudianteTitulo').textContent = 'Editar Estudiante';
-                document.getElementById('estRowIndex').value = est.rowIndex;
-                document.getElementById('estCodigo').value = est.codigo;
-                document.getElementById('estNombre').value = est.nombre;
-                document.getElementById('estCurso').value = est.curso;
-                document.getElementById('estContacto').value = est.contacto;
-                document.getElementById('estCorreo').value = est.correo;
-            } else {
-                document.getElementById('modalEstudianteTitulo').textContent = 'Nuevo Estudiante';
-                document.getElementById('estRowIndex').value = '';
-            }
-            abrirModal('modalEstudiante');
-        }
-
-        function ejecutarGuardarEstudiante(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnSaveEst');
-            btn.disabled = true;
-
-            const payload = {
-                rowIndex: document.getElementById('estRowIndex').value,
-                codigo: document.getElementById('estCodigo').value,
-                nombre: document.getElementById('estNombre').value,
-                curso: document.getElementById('estCurso').value,
-                contacto: document.getElementById('estContacto').value,
-                correo: document.getElementById('estCorreo').value
-            };
-
-            setSyncStatus('syncing', 'Guardando...');
-
-            google.script.run
-                .withSuccessHandler(res => {
-                    btn.disabled = false;
-                    if (res.success) {
-                        cerrarModal('modalEstudiante');
-                        cargarDatos(false);
-                    } else alert(res.error);
-                })
-                .withFailureHandler(err => {
-                    btn.disabled = false;
-                    alert('Error: ' + err.message);
-                })
-                .guardarEstudiante(payload, usuarioSesion);
-        }
-
-        function confirmarEliminarEstudiante(rowIndex, nombre) {
-            if (confirm(`¿Estás seguro de que deseas eliminar a ${nombre}?`)) {
-                setSyncStatus('syncing', 'Eliminando...');
-                google.script.run
-                    .withSuccessHandler(res => {
-                        if (res.success) cargarDatos(false);
-                        else alert('Error: ' + res.error);
-                    })
-                    .withFailureHandler(err => alert('Error: ' + err.message))
-                    .eliminarEstudiante(rowIndex);
-            }
-        }
-
-        function renderEstudiantesEvaluar() {
-            const filter = document.getElementById('filtroTablaEstudiantes').value.toLowerCase();
-            const tbody = document.getElementById('tblEstudiantesBody');
-            tbody.innerHTML = '';
-
-            const filtrados = listaEstudiantesGlobal.filter(e => e.curso === cursoActual && e.nombre.toLowerCase().includes(filter));
-
-            if (filtrados.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 font-bold uppercase text-xs">Sin registros en este curso</td></tr>';
-                return;
-            }
-
-            filtrados.forEach(e => {
-                const tData = e[`t${trimestreActual}`] || { ser:0, saber:0, hacer:0, auto:0, total:0 };
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/50';
-                tr.innerHTML = `
-                    <td class="px-8 py-4">
-                        <div class="font-black text-slate-800 uppercase text-xs">${e.nombre}</div>
-                        <div class="text-[9px] text-slate-400 font-bold">CÓD: ${e.codigo}</div>
-                    </td>
-                    <td class="px-2 py-4"><input type="number" min="0" max="10" onchange="guardarNotaServidor(${e.rowIndex}, 'ser', this.value, this)" value="${tData.ser}" class="score-input w-12 mx-auto block text-center py-2 rounded-xl bg-amber-50/50 text-amber-700 font-black text-xs"></td>
-                    <td class="px-2 py-4"><input type="number" min="0" max="45" onchange="guardarNotaServidor(${e.rowIndex}, 'saber', this.value, this)" value="${tData.saber}" class="score-input w-12 mx-auto block text-center py-2 rounded-xl bg-blue-50/50 text-blue-700 font-black text-xs"></td>
-                    <td class="px-2 py-4"><input type="number" min="0" max="40" onchange="guardarNotaServidor(${e.rowIndex}, 'hacer', this.value, this)" value="${tData.hacer}" class="score-input w-12 mx-auto block text-center py-2 rounded-xl bg-emerald-50/50 text-emerald-700 font-black text-xs"></td>
-                    <td class="px-2 py-4"><input type="number" min="0" max="5" onchange="guardarNotaServidor(${e.rowIndex}, 'auto', this.value, this)" value="${tData.auto}" class="score-input w-12 mx-auto block text-center py-2 rounded-xl bg-purple-50/50 text-purple-700 font-black text-xs"></td>
-                    <td class="px-4 py-4 text-center bg-slate-50/80">
-                        <span id="tot-tri-${e.rowIndex}" class="inline-block px-3 py-1 rounded-lg font-black text-xs ${tData.total < 51 ? 'text-rose-500 bg-rose-50' : 'text-slate-900 bg-slate-100'}">${tData.total}</span>
-                    </td>
-                    <td class="px-4 py-4 text-center">
-                        <span id="tot-fin-${e.rowIndex}" class="font-black text-xs text-slate-700">${e.notaFinal}</span>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function guardarNotaServidor(rowIndex, campo, valor, elem) {
-            const tr = elem.closest('tr');
-            const inputs = tr.querySelectorAll('input');
-            const payload = {
-                rowIndex: rowIndex,
-                trimestre: trimestreActual,
-                ser: inputs[0].value,
-                saber: inputs[1].value,
-                hacer: inputs[2].value,
-                auto: inputs[3].value
-            };
-
-            setSyncStatus('syncing', 'Guardando nota...');
-
-            google.script.run
-                .withSuccessHandler(res => {
-                    if (res.success) {
-                        setSyncStatus('success', 'Nota guardada');
-                        document.getElementById(`tot-tri-${rowIndex}`).textContent = res.notaTri;
-                        document.getElementById(`tot-fin-${rowIndex}`).textContent = res.notaFinal;
-                    } else { setSyncStatus('error', 'Error al guardar'); }
-                })
-                .withFailureHandler(() => setSyncStatus('error', 'Error conexión'))
-                .guardarCalificaciones(payload);
-        }
-
-        function renderGraficos(cCont, rCont) {
-            const ctxC = document.getElementById('chartCursos').getContext('2d');
-            if (chartCursosInstance) chartCursosInstance.destroy();
-            chartCursosInstance = new Chart(ctxC, {
-                type: 'bar',
-                data: { labels: Object.keys(cCont || {}), datasets: [{ data: Object.values(cCont || {}), backgroundColor: '#6366f1', borderRadius: 10 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
-
-            const ctxR = document.getElementById('chartRoles').getContext('2d');
-            if (chartRolesInstance) chartRolesInstance.destroy();
-            chartRolesInstance = new Chart(ctxR, {
-                type: 'doughnut',
-                data: { labels: Object.keys(rCont || {}), datasets: [{ data: Object.values(rCont || {}), backgroundColor: ['#1e293b', '#10b981', '#6366f1', '#f59e0b'] }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-            });
-        }
-
-        function setSyncStatus(state, message) {
-            const dot = document.getElementById('sync-dot');
-            const text = document.getElementById('sync-text');
-            if (!dot || !text) return;
-            text.innerText = message;
-            dot.className = "w-2 h-2 rounded-full " + (state === 'syncing' ? 'bg-amber-500 animate-pulse' : state === 'success' ? 'bg-emerald-500' : 'bg-rose-500');
-        }
-
-        function abrirModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function cerrarModal(id) { document.getElementById(id).classList.add('hidden'); }
-
-        function guardarUsuario(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnSaveUsr');
-            btn.disabled = true;
-            google.script.run
-                .withSuccessHandler(res => {
-                    btn.disabled = false;
-                    if (res.success) {
-                        document.getElementById('formUsuario').reset();
-                        cerrarModal('modalUsuario');
-                        cargarDatos(false);
-                    } else alert(res.error);
-                })
-                .registrarUsuario({
-                    usuario: document.getElementById('usrUsuario').value,
-                    password: document.getElementById('usrPassword').value,
-                    nombre: document.getElementById('usrNombre').value,
-                    rol: document.getElementById('usrRol').value,
-                    correo: document.getElementById('usrCorreo').value
-                });
-        }
-    </script>
-</body>
-</html>
+<body>
+
+    <div class="card">
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
